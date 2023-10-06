@@ -1,0 +1,246 @@
+Server [localhost]:
+Database [postgres]:
+Port [5432]:
+Username [postgres]:
+Пароль пользователя postgres:
+psql (16.0)
+ПРЕДУПРЕЖДЕНИЕ: Кодовая страница консоли (866) отличается от основной
+                страницы Windows (1251).
+                8-битовые (русские) символы могут отображаться некорректно.
+                Подробнее об этом смотрите документацию psql, раздел
+                "Notes for Windows users".
+Введите "help", чтобы получить справку.
+
+postgres=# CREATE TABLE englishCourse(
+postgres(#  id serial primary key,
+postgres(# asdf,)
+postgres-# ;
+ОШИБКА:  ошибка синтаксиса (примерное положение: ",")
+СТРОКА 3: asdf,)
+              ^
+postgres=# CREATE TABLE movie(
+postgres(# id sereial primary key,
+postgres(# name_movie character(50),
+postgres(# director character (100)
+postgres(# );
+ОШИБКА:  тип "sereial" не существует
+СТРОКА 2: id sereial primary key,
+             ^
+postgres=# CREATE TABLE movie(
+postgres(# id serial primary key,
+postgres(# name_movie character(50),
+postgres(# director(100)
+postgres(# );
+ОШИБКА:  ошибка синтаксиса (примерное положение: "(")
+СТРОКА 4: director(100)
+                  ^
+postgres=# CREATE TABLE movie(
+postgres(# id serial primery key,
+postgres(# name_movie character(50),
+postgres(# director character(100)
+postgres(# );
+ОШИБКА:  ошибка синтаксиса (примерное положение: "primery")
+СТРОКА 2: id serial primery key,
+                    ^
+postgres=#  CREATE TABLE movie(
+postgres(#  id serial primary key,
+postgres(#  name_movie character(50),
+postgres(# director character(100)
+postgres(# );
+CREATE TABLE
+postgres=# INSERT INTO movie(name_moive,director)
+postgres-# VALUES
+postgres-# ('I M LEGENGD'),
+postgres-# ('I M LEGENGD'));
+ОШИБКА:  ошибка синтаксиса (примерное положение: ")")
+СТРОКА 4: ('I M LEGENGD'));
+                         ^
+postgres=# INSERT INTO movie(name_moive,director)
+postgres-# VALUES
+postgres-# ('I M LEGENGD','JANDAR'),
+postgres-# ('I RON MAN','ERKIN'),
+postgres-# ('JON WHIK','ZALKAR'),
+postgres-# ('GREEN BOOK','ALINA'),
+postgres-# ('BARBY','TUNUK'),
+postgres-# ('SPIDER MAN','ERKIN3');
+ОШИБКА:  столбец "name_moive" в таблице "movie" не существует
+СТРОКА 1: INSERT INTO movie(name_moive,director)
+                            ^
+postgres=#  INSERT INTO movie(name_moive,director)
+postgres-# VALUES
+postgres-# ;
+ОШИБКА:  ошибка синтаксиса (примерное положение: ";")
+СТРОКА 3: ;
+          ^
+postgres=#  INSERT INTO movie(name_movie,director)
+postgres-# VALUES
+postgres-# ('I M LEGENGD','JANDAR'),
+postgres-# ('I RON MAN','ERKIN'),
+postgres-# ('JON WHIK','ZALKAR'),
+postgres-# ('GREEN BOOK','ALINA'),
+postgres-# ('BARBY','TUNUK');
+INSERT 0 5
+postgres=# CREATE TABLE Actors(
+postgres(# actor_id serial primary key,
+postgres(# name character(100),
+postgres(# birth_year int);
+CREATE TABLE
+postgres=# INSERT INTO Actors (name,birth_year)
+postgres-# VALUES
+postgres-# ('erkin',2002),
+postgres-# ('jandar',2001),
+postgres-# ('adely',2000),
+postgres-# ('zalkar'2007),
+postgres-# ('tunuk',2008),
+postgres-# ('alina',2002);
+ОШИБКА:  ошибка синтаксиса (примерное положение: "2007")
+СТРОКА 6: ('zalkar'2007),
+                   ^
+postgres=# INSERT INTO Actors (name,birth_year)
+postgres-# VALUES
+postgres-# ('erkin',2002),
+postgres-# ('jandar',2001),
+postgres-# ('adely',2000),
+postgres-# ('zalkar',2007),
+postgres-# ('tunuk',2008),
+postgres-# ('alina',2002);
+INSERT 0 6
+postgres=# CREATE TABLE MovieActors(
+postgres(# movie_id int REFERENCES movie,
+postgres(# actor_id int REFERENCES Actors);
+CREATE TABLE
+postgres=# INSERT INTO MovieActors (movie_id,actor_id)
+postgres-# VALUES
+postgres-# (1,1),
+postgres-# (2,2),
+postgres-# (3,4),
+postgres-# (4,3),
+postgres-# (5,5);
+INSERT 0 5
+postgres=# CREATE TABLE Cars(
+postgres(#  car_id serial PRIMARY KEY,
+postgres(# make varchar(100),
+postgres(# model varchar(100),
+postgres(# year int,
+postgres(# owner_id int REFERENCES Owners);
+ОШИБКА:  отношение "owners" не существует
+postgres=# CREATE TABLE Owners (
+postgres(# owner_id serial PRIMARY KEY,
+postgres(# first_name varchar(100),
+postgres(# last_name varchar(100) );
+CREATE TABLE
+postgres=# INSERT INTO Owners (first_name, last_name)
+postgres-# VALUES
+postgres-# ('John', 'Doe'),
+postgres-# ('Alice', 'Smith'),
+postgres-#  ('Robert', 'Johnson');
+INSERT 0 3
+postgres=# CREATE TABLE Cars(
+postgres(#  car_id serial PRIMARY KEY,
+postgres(#  make varchar(100),
+postgres(# model varchar(100),
+postgres(# year int,
+postgres(# owner_id int REFERENCES Owners);
+CREATE TABLE
+postgres=# INSERT INTO Cars (make, model, year, owner_id)
+postgres-# VALUES
+postgres-# ('Toyota', 'Camry', 2020, 1),
+postgres-# ('Honda', 'Civic', 2019, 2),
+postgres-# ('Ford', 'Focus', 2021, 3);
+INSERT 0 3
+postgres=# CREATE TABLE ServiceOrders (
+postgres(#  order_id serial PRIMARY KEY,
+postgres(#  service_type varchar(100),
+postgres(# order_date date );
+CREATE TABLE
+postgres=# INSERT INTO ServiceOrders (car_id, service_type, order_date)
+postgres-# VALUES
+postgres-# (1, 'Техническое обслуживание', '2023-10-15'),
+postgres-# (2, 'Замена масла', '2023-10-16'),
+postgres-# (3, 'Ремонт двигателя', '2023-10-17');
+ОШИБКА:  столбец "car_id" в таблице "serviceorders" не существует
+СТРОКА 1: INSERT INTO ServiceOrders (car_id, service_type, order_date)
+                                     ^
+postgres=# ALTER TABLE ServiceOrders
+postgres-# ALTER COLUMN car_id
+postgres-# SET DATA TYPE int;
+ОШИБКА:  столбец "car_id" в таблице "serviceorders" не существует
+postgres=# DROP TABLE  ServiceOrders
+postgres-# ;
+DROP TABLE
+postgres=# CREATE TABLE ServiceOrders (
+postgres(# order_id serial PRIMARY KEY,
+postgres(# car_id int REFERENCES Cars,
+postgres(# service_type varchar(100),
+postgres(#  order_date date );
+CREATE TABLE
+postgres=#  INSERT INTO ServiceOrders (car_id, service_type, order_date)
+postgres-#  VALUES
+postgres-# (1, 'Техническое обслуживание', '2023-10-15'),
+postgres-# (2, 'Замена масла', '2023-10-16'),
+postgres-# (3, 'Ремонт двигателя', '2023-10-17');
+INSERT 0 3
+postgres=# CREATE TABLE Customers1 (
+postgres(# customer1_id serial PRIMARY KEY,
+postgres(# first_name varchar(100),
+postgres(# last_name varchar(100),
+postgres(# email varchar(100) )ж
+postgres-# :
+postgres-# :
+postgres-# ;
+ОШИБКА:  ошибка синтаксиса (примерное положение: "│")
+СТРОКА 5: email varchar(100) )│
+                              ^
+postgres=# CREATE TABLE Customers1 (
+postgres(# # customer1_id serial PRIMARY KEY,
+postgres(# first_name varchar(100),
+postgres(# last_name varchar(100),
+postgres(#  email varchar(100) );
+ОШИБКА:  ошибка синтаксиса (примерное положение: "#")
+СТРОКА 2: # customer1_id serial PRIMARY KEY,
+          ^
+postgres=# CREATE TABLE Customers1 (
+postgres(# first_name varchar(100),
+postgres(# ;
+postgres(# );
+ОШИБКА:  ошибка синтаксиса (примерное положение: ";")
+СТРОКА 3: ;
+          ^
+postgres=# CREATE TABLE Customers1 (
+postgres(# customer1_id serial PRIMARY KEY,
+postgres(# first_name varchar(100),
+postgres(# last_name varchar(100),
+postgres(#  email varchar(100) );
+CREATE TABLE
+postgres=# INSERT INTO Customers (first_name, last_name, email)
+postgres-# VALUES
+postgres-# ('John', 'Doe', 'john@example.com'),
+postgres-# ('Alice', 'Smith', 'alice@example.com'),
+postgres-# ('Robert', 'Johnson', 'robert@example.com');
+ОШИБКА:  столбец "email" в таблице "customers" не существует
+СТРОКА 1: INSERT INTO Customers (first_name, last_name, email)
+                                                        ^
+postgres=# INSERT INTO Customers1 (first_name, last_name, email)
+postgres-# VALUES
+postgres-# ('John', 'Doe', 'john@example.com'),
+postgres-# ('Alice', 'Smith', 'alice@example.com'),
+postgres-# ('Robert', 'Johnson', 'robert@example.com');
+INSERT 0 3
+postgres=# CREATE TABLE Orders1 (
+postgres(# order_id serial PRIMARY KEY,
+postgres(# customer_id int REFERENCES Customers1,
+postgres(# order_date date);
+CREATE TABLE
+postgres=# INSERT INTO Orders (customer_id, order_date)
+postgres-# VALUES
+postgres-#  (1, '2023-10-15'),
+postgres-#  (2, '2023-10-16'),
+postgres-#  (3, '2023-10-17');
+INSERT 0 3
+postgres=# CREATE TABLE Products1 (
+postgres(# product1_id serial PRIMARY KEY,
+postgres(# product_name varchar(100));
+CREATE TABLE
+postgres=# INSERT INTO Products (product_name)VALUES  ('Лаптоп'),('Смартфон'),('Планшет'),('Наушники');
+INSERT 0 4
+postgres=#

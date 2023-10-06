@@ -1,0 +1,131 @@
+
+1.
+CREATE TABLE Students (
+                          student_id serial PRIMARY KEY,
+                          first_name varchar(100),
+                          last_name varchar(100),
+                          age int,
+                          email varchar(100),
+                          university_id int REFERENCES Universities(university_id)
+);
+
+INSERT INTO Students (first_name, last_name, age, email, university_id)
+VALUES
+    ('John', 'Doe', 20, 'john@example.com', 1),
+    ('Alice', 'Smith', 22, 'alice@example.com', 2),
+    ('Robert', 'Johnson', 21, 'robert@example.com', 1);
+
+
+2.
+CREATE TABLE Universities (
+  university_id serial PRIMARY KEY,
+  university_name varchar(100)
+);
+
+INSERT INTO Universities (university_name)
+VALUES
+  ('University A'),
+  ('University B');
+
+3.
+CREATE TABLE Books (
+  book_id serial PRIMARY KEY,
+  title varchar(100),
+  author varchar(100),
+  publication_year int
+);
+
+INSERT INTO Books (title, author, publication_year)
+VALUES
+  ('Book 1', 'Author A', 2000),
+  ('Book 2', 'Author B', 2010),
+  ('Book 3', 'Author C', 2021);
+
+4.
+CREATE TABLE Libraries (
+  library_id serial PRIMARY KEY,
+  library_name varchar(100),
+  location varchar(100)
+);
+
+INSERT INTO Libraries (library_name, location)
+VALUES
+  ('Library X', 'City A'),
+  ('Library Y', 'City B');
+
+5.
+CREATE TABLE Authors (
+  author_id serial PRIMARY KEY,
+  first_name varchar(100),
+  last_name varchar(100)
+);
+
+INSERT INTO Authors (first_name, last_name)
+VALUES
+  ('Author A', 'Smith'),
+  ('Author B', 'Johnson');
+
+6.
+CREATE TABLE Genres (
+  genre_id serial PRIMARY KEY,
+  genre_name varchar(100)
+);
+
+INSERT INTO Genres (genre_name)
+VALUES
+  ('Fiction'),
+  ('Mystery'),
+  ('Romance');
+
+7.
+CREATE TABLE BookAuthors (
+  book_id int REFERENCES Books(book_id),
+  author_id int REFERENCES Authors(author_id)
+);
+
+INSERT INTO BookAuthors (book_id, author_id)
+VALUES
+  (1, 1),
+  (2, 2),
+  (3, 1);
+
+8.
+CREATE TABLE BookGenres (
+  book_id int REFERENCES Books(book_id),
+  genre_id int REFERENCES Genres(genre_id)
+);
+
+INSERT INTO BookGenres (book_id, genre_id)
+VALUES
+  (1, 1),
+  (2, 2),
+  (3, 3);
+
+9.
+
+CREATE TABLE RestaurantOrders (
+  order_id serial PRIMARY KEY,
+  customer_id int REFERENCES Customers(customer_id),
+  order_date date,
+  total_amount numeric(10, 2)
+);
+
+INSERT INTO RestaurantOrders (customer_id, order_date, total_amount)
+VALUES
+  (1, '2023-10-15', 50.25),
+  (2, '2023-10-16', 30.50),
+  (3, '2023-10-17', 45.75);
+
+10.
+CREATE TABLE RestaurantMenu (
+  item_id serial PRIMARY KEY,
+  item_name varchar(100),
+  item_price numeric(10, 2)
+);
+
+INSERT INTO RestaurantMenu (item_name, item_price)
+VALUES
+  ('Стейк', 25.99),
+  ('Паста', 15.50),
+  ('Салат', 8.75);
+
